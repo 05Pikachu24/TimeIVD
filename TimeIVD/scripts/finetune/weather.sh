@@ -1,0 +1,39 @@
+for pred_len in 96 192 336 720; do
+    python -u run.py \
+        --task_name finetune \
+        --is_training 1 \
+        --root_path ./data/ \
+        --data_path weather.csv \
+        --model_id Weather \
+        --model TimeIVD \
+        --data Weather \
+        --features M \
+        --input_len 96 \
+        --label_len 48 \
+        --pred_len $pred_len \
+        --e_layers 2 \
+        --enc_in 21 \
+        --dec_in 21 \
+        --c_out 21 \
+        --n_heads 16 \
+        --d_model 128 \
+        --Gaussian_dim 128 \
+        --kernel_size 1 \
+        --context_dim 336 \
+        --context_hidden_dim 128 \
+        --d_ff 0 \
+        --patch_len 4 \
+        --stride 4 \
+        --dropout 0.1 \
+        --head_dropout 0.1 \
+        --batch_size 16 \
+        --gpu 0 \
+        --lr_decay 0.5 \
+        --lradj step \
+        --time_steps 1000 \
+        --scheduler cosine \
+        --patience 3 \
+        --learning_rate 0.001 \
+        --pct_start 0.3 \
+        --train_epochs 20
+done

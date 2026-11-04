@@ -1,0 +1,41 @@
+for pred_len in 96 192 336 720; do
+    python -u run.py \
+            --task_name finetune \
+            --is_training 1 \
+            --root_path ./data/ \
+            --data_path ETTh2.csv \
+            --model_id ETTh2 \
+            --model TimeIVD \
+            --data ETTh2 \
+            --features M \
+            --input_len 96 \
+            --label_len 48 \
+            --pred_len $pred_len \
+            --e_layers 2 \
+            --enc_in 7 \
+            --dec_in 7 \
+            --c_out 7 \
+            --n_heads 16 \
+            --d_model 256 \
+            --Gaussian_dim 128 \
+            --kernel_size 6 \
+            --context_dim 128 \
+            --context_hidden_dim 128 \
+            --d_ff 0 \
+            --patch_len 12 \
+            --stride 12 \
+            --dropout 0.1 \
+            --head_dropout 0.1 \
+            --batch_size 128 \
+            --gpu 0 \
+            --lr_decay 0.5 \
+            --lradj decay \
+            --loss "MAE" \
+            --time_steps 1000 \
+            --scheduler cosine \
+            --patience 3 \
+            --learning_rate 0.0005 \
+            --pct_start 0.3
+done
+
+
